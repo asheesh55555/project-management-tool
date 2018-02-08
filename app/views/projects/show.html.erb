@@ -1,0 +1,44 @@
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Descriptions:</strong>
+  <%= @project.descriptions %>
+</p>
+
+<p>
+  <strong>Technology:</strong>
+  <%= @project.technology %>
+</p>
+<p>
+  <strong>Document:</strong>
+  <% if @project.document.present?%>
+    <%= image_tag @project.document.url(:thumb) %>
+  <% end %>
+</p>
+<p>
+  <strong>Project type:</strong>
+  <%= @project.project_type %>
+</p>
+
+<p>
+  <strong>Client name:</strong>
+  <%= @project.client_name %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @project.cost %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @project.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @project.end_date %>
+</p>

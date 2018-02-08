@@ -1,0 +1,46 @@
+<h1>Projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Descriptions</th>
+      <th>Technology</th>
+      <th>Document</th>
+      <th>Project type</th>
+      <th>Client name</th>
+      <th>Cost</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.descriptions %></td>
+        <td><%= project.technology %></td>
+        <% if project.document.present?%>
+          <td><%= image_tag project.document.url(:thumb) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= project.project_type %></td>
+        <td><%= project.client_name %></td>
+        <td><%= project.cost %></td>
+        <td><%= project.start_date %></td>
+        <td><%= project.end_date %></td>
+        <td><li class="list-group-item"><%= link_to 'Add Task', project_tasks_path(project) %></li></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>

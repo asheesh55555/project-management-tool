@@ -1,0 +1,36 @@
+
+<h1>Teams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= link_to 'Show', team %></td>
+        <td><%= link_to 'Edit', edit_team_path(team) %></td>
+        <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><li class="list-group-item"><%= link_to "Assign Project to #{team.name}", assign_project_team_path(team) %></li></td>
+        <td><li class="list-group-item"><%= link_to "Assign Members to #{team.name}", assign_member_team_path(team) %></li> 
+
+        </td>
+        <td>
+          <% if team.users.any? && team.projects.any?%>
+            <li class="list-group-item"><%= link_to "Assign Project tasks to #{team.name} members", assign_member_project_team_path(team) %></li>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+    
+<%= link_to 'New Team', new_team_path %>

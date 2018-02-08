@@ -1,0 +1,22 @@
+<%= form_with(model: technology, local: true) do |form| %>
+  <% if technology.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(technology.errors.count, "error") %> prohibited this technology from being saved:</h2>
+
+      <ul>
+      <% technology.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :technology_name, class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit', class: "btn btn-primary"  %>
+  </div>
+<% end %>

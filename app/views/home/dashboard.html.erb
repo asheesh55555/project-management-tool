@@ -1,0 +1,11 @@
+<ul class="list-group">
+  <% if ApplicationAuthorizer.creatable_by?(current_user) %>
+    <li class="list-group-item"><%= link_to 'All Projects', projects_path %></li>
+    <li class="list-group-item"><%= link_to 'Teams', teams_path %></li>
+  <% else %>
+     <% if current_user.team.present? %>
+      <li class="list-group-item"><%= link_to 'All Project and Task', users_details_team_path(current_user.team , current_user) %></li>
+      <% end %>
+  <% end %>
+
+</ul>

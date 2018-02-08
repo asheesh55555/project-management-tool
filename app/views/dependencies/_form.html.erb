@@ -1,0 +1,11 @@
+<%= form_with(model: [ @project, @task, @task.dependencies.build ], local: true) do |form| %>
+  
+  <div class="form-group">
+    <%= form.label :Add_dependency %>
+    <%= form.text_field :name, id: :dependency_name, class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp", placeholder: "Enter Dependency" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save Dependency", class: "btn btn-primary" %>
+  </div>
+<% end %>

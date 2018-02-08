@@ -1,0 +1,41 @@
+<p>
+  <strong>Team:</strong>
+  <%= @user.team.name %>
+</p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @user.email %>
+  <%= link_to 'Project and Task', users_details_team_path(@user.team, @user)%>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @project.name %>
+</p>
+<%@team = @user.team%>                               
+
+<%= form_for :assign_project_task_team_member, url: assigned_member_project_task_team_path(@team) do |f| %>
+
+   <div class="field">
+    <%= f.label :task %>
+    <%= f.select("task_id", @un_assigned_task.collect {|t| [ t.name, t.id ] }, { include_blank: true },class: "form-control", :required => true)%>
+    <%= f.hidden_field :team_id, value: @team.id %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.hidden_field :project_id, value: @project.id %>
+  </div>
+
+  <p>
+    <%= f.submit 'Assign', class: "btn btn-primary"%>
+  </p>
+<% end %>
+<%if @tasks.first.present?%>
+
+    <%@tasks.each do |t|%>
+    <p>
+      <strong>Task Assigned:</strong>
+      <%= Task.find(t.task_id).name %>
+    </p>
+    <%end%>
+<%end%>
+<%= link_to 'Back', teams_path, class: "btn btn-primary", style: "float: right;"%>

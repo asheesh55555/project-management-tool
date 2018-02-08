@@ -1,0 +1,5 @@
+<strong>Task:</strong>
+<%= task.name %>
+<%= link_to 'Edit Task', edit_project_task_path(@project,task) %>
+<%= link_to 'Destroy Task', project_task_path(@project,task),  method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= render 'dependencies/dependency', task: task %>      

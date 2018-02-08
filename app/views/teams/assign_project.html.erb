@@ -1,0 +1,22 @@
+<%= form_for :assign_project, url: assigned_project_team_path do |f| %>
+  <div class="form-group">
+    <label><b>Team Name:</b></label>
+    <%= f.label :team, @team.name %>
+    <%= f.hidden_field :team_id, value: @team.id %>
+  </div>
+  <div class="form-group">
+    <%= f.label :project %>
+    <%= f.select("project_id", @projects.collect {|p| [ p.name, p.id ] }, { include_blank: true }, id: 'project_assign', prompt: 'select',  multiple: "multiple", class: "form-control", required: true)%>
+  </div>
+  <p>
+    <%= f.submit 'Assign', class: "btn btn-primary"%>
+  </p>
+<% end %>
+
+<script type="text/javascript">
+  $( "#project_assign" ).select2({
+      multiple:true,
+      tags: true
+  });
+  $('#project_assign').val(<%=@team.projects.map(&:id) %>).trigger("change");
+</script>

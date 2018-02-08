@@ -1,0 +1,17 @@
+<h1>Editing Task</h1>
+
+<%#= form_with(model: task, local: true) do |form| %>
+<%= form_with(model: [ @project, @task ], local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :edit_task %>
+    <%= form.text_field :name, id: :task_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+

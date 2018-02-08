@@ -1,0 +1,26 @@
+<%= form_for :assign_member, url: assigned_member_team_path do |f| %>
+
+  <div class="field">
+    <label><b>Team Name:</b></label>
+    <%= f.label :team, @team.name %>
+    <%= f.hidden_field :team_id, value: @team.id %>
+  </div>
+  
+
+<div class="form-group">
+    <%= f.label :user %>
+    <%= f.select("user_id", @users.collect {|u| [ u.email, u.id ] }, { include_blank: true }, id: 'user_assign', prompt: 'select',  multiple: "multiple", class: "form-control", required: true)%>
+  </div>
+  <p>
+    <%= f.submit 'Assign', class: "btn btn-primary"%>
+  </p>
+<% end %>
+<%= link_to 'Back', teams_path, class: "btn btn-primary", style: "float: right;"%>
+
+
+<script type="text/javascript">
+  $( "#user_assign" ).select2({
+      multiple:true,
+  });
+  $('#user_assign').val(<%=@team.users.map(&:id) %>).trigger("change");
+</script>

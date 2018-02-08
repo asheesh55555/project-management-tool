@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: root
+  password: root
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: management_tool1
+
+
+
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: root
+  password: root
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+production:
+  <<: *default
+  database: management_tool1

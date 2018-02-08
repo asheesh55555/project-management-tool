@@ -1,0 +1,19 @@
+<p>
+  <strong>Task:</strong>
+  <%= @task.name %>
+</p>
+<%if @task.dependencies.first.present? %>
+    <p>
+     <strong>Dependencies:</strong>
+    </p>
+	<% @task.dependencies.each do |dependency| %>
+     <p>
+     <%= dependency.name%>
+    </p>
+	<%end%>
+<%end%>
+
+<% if ApplicationAuthorizer.creatable_by?(current_user) %>
+  <%= link_to 'Edit', edit_project_task_path(@task.project, @task) %> |
+  <%= link_to 'Back', project_tasks_path(@task.project) %>
+<% end %>

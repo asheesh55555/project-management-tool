@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Assigned Projects</th>
+      <% if assigned %>
+        <th>Assigned Members</th>
+      <% end %>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <% team.projects.each_with_index do |project|%>
+          <td><li class="list-group-item"><%= link_to "#{project.name}", '#' %></li></td>
+        <% end %>
+        <% if assigned %>
+          <% team.users.each do |member|%>
+            <td><li class="list-group-item"><%= link_to "#{member.email}", '#' %></li></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

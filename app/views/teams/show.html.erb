@@ -1,0 +1,7 @@
+<h4><%= @team.name%> Team Assigned Projects</h4>
+<%= render 'projects' , projects: @team.projects%>
+<h4><%= @team.name%> Team Assigned Members</h4>
+<%= render 'members' , members: @team.users%>
+<%= link_to 'Back', teams_path, class: "btn btn-primary", style: "float: right;"%>
+
+

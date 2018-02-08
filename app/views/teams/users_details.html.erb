@@ -1,0 +1,29 @@
+<h3>All Assigned Projects and Tasks</h3>
+<% @user.projects.each do |project|%>
+<% @tasks = MemberTask.member_tasks(@user.team.id, @user.id, project.id)%>
+	<table>
+	  <thead>
+	    <tr>
+	    <th>Project</th>
+	    <%@tasks.each do |task|%>
+	    <th>Task</th>
+	    <%end%>
+	     <th colspan="3"></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	      <tr>
+	          <td><li class="list-group-item"><%= link_to "#{project.name}", project_path(project) %></li></td>
+	          <% @tasks = MemberTask.member_tasks(@user.team.id, @user.id, project.id)%>
+	          <%@tasks.each do |task|%>
+	              <td><li class="list-group-item"><%= link_to "#{task.name}", project_task_path(project, task) %></li></td>
+	          <%end%>
+	      </tr>
+	  </tbody>
+	</table>
+<% end %>
+<% if ApplicationAuthorizer.creatable_by?(current_user) %>
+   <%= link_to 'Back', teams_path, class: "btn btn-primary", style: "float: right;"%>
+<% end %>   
+

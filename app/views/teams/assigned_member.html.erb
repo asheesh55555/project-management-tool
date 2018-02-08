@@ -1,0 +1,23 @@
+
+<p>
+  <strong>Team Name:</strong>
+  <%= @team.name %>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>User email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+	<tbody>
+  <% @team.users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+    </tr>
+  <% end %>
+</tbody>
+
+</table>
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

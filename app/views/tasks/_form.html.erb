@@ -1,0 +1,11 @@
+<%= form_with(model: [ @project, @project.tasks.build ], local: true) do |form| %>
+
+  <div class="form-group">
+    <%#= form.label :Add_task %>
+    <%= form.text_field :name, id: :task_name,  class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp", placeholder: "Enter Task Details " %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save Task', class: "btn btn-primary" %>
+  </div>
+<% end %>

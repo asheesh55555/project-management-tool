@@ -1,0 +1,15 @@
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <% members.each do |m|%>
+          <td><li class="list-group-item"><%= link_to "#{m.email}", users_details_team_path(@team,
+          m) %></li></td>
+          <% end %>
+      </tr>
+  </tbody>
+</table>

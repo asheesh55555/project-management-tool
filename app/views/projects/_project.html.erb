@@ -1,0 +1,9 @@
+<tbody>
+  <% project.each do |project| %>
+    <tr>
+      <td><%= project.name %></td>
+      <td><li class="list-group-item"><%= link_to 'Add Task and Dependency', project %></li></td>
+     
+    </tr>
+  <% end %>
+</tbody>

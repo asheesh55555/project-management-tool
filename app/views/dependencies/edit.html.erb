@@ -1,0 +1,14 @@
+<h1>Editing Dependency</h1>
+
+<%= form_with(model: [ @project, @task, @dependency ], local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :Edit_dependency %>
+    <%= form.text_field :name, id: :dependency_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

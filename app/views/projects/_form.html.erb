@@ -1,0 +1,85 @@
+<%= form_with(model: project, local: true) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :project_name, :required => true,  class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :descriptions %>
+    <%= form.text_area :descriptions, id: :project_descriptions,  class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :technology %>
+    <select name="project[technology]" class="form-control" id="exampleInputEmail1" aria_describedby="emailHelp">
+        <%Technology.all.each do |t|%>
+            <option value="<%=t.name%>"><%=t.name%></option>
+        <%end%>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :document %>
+    <%= form.file_field :document, id: :project_document ,  class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp"%>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :project_type %>
+    <select name="project[project_type]" class="form-control" id="exampleInputEmail1" aria_describedby="emailHelp">
+        <option value="Fixed Price">Fixed Price</option>
+        <option value="Time & Material">Time & Material</option>
+    </select>
+  </div>
+  
+ <div class="form-group">
+    <%= form.label :client_name %>
+    <select name="project[client_name]" class="form-control" id="exampleInputEmail1" aria_describedby="emailHelp">
+        <%Client.all.each do |c|%>
+            <option value="<%=c.name%>"><%=c.name%></option>
+        <%end%>
+    </select>
+  </div> 
+
+  <div class="form-group">
+    <%= form.label :cost %>
+    <%= form.number_field :cost, id: :project_cost , step: :any ,  class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp"%>
+  </div>
+
+ <div class="form-group">
+    <%= form.label :start_date %>
+    <%= form.text_field :start_date, id: :project_start_date,  class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp",id: "datetimepicker1" %>
+  </div>
+
+   <div class="form-group">
+    <%= form.label :end_date %>
+    <%= form.text_field :end_date, id: :project_end_date ,  class: "form-control", id: "exampleInputEmail1", aria_describedby: "emailHelp",id: "datetimepicker2"%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit',  class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+
+ <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                format:'DD/MM/YYYY'
+               });
+                $('#datetimepicker2').datetimepicker({
+                format:'DD/MM/YYYY'
+               });
+            });
+</script>
