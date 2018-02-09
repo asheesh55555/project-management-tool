@@ -95,44 +95,31 @@ class TeamsController < ApplicationController
   end
 
   def assigned_member_project
-        user_id = params[:assign_project_member][:user_id]
-        project_id = params[:assign_project_member][:project_id]
-        @user = User.find(user_id)
-        @project = Project.find(project_id)
-        @tasks=MemberTask.where(team_id: User.find(user_id).team.id,  user_id: user_id, project_id: project_id)
-       
-        @un_assigned_task = []
-        @project.tasks.each do |t|
-            unless MemberTask.where(task_id: t.id).first.present?
-              @un_assigned_task.push(t)
-            end
-        end
-
-        if UserProject.where(user_id: user_id, project_id: project_id).first.present?
-                flash[:notice] = "This Project already assingned to this member please assign task."
-        else
-           UserProject.create(assigned_member_project_params)
-                flash[:notice] = "Project assigned."
-        end
-      
+    user_id = params[:assign_project_member][:user_id]
+    project_id = params[:assign_project_member][:project_id]
+    @user = User.find(user_id)
+    @project = Project.find(project_id)
+    @tasks=MemberTask.assigned_task(user_id, project_id)
+    @un_assigned_task = MemberTask.un_assigned_task(@project)
+    if UserProject.is_already_assingned?(user_id, project_id)
+            flash[:notice] = "This Project already assingned to this member please assign task."
+    else
+       UserProject.create(assigned_member_project_params)
+            flash[:notice] = "Project assigned."
+    end
   end
 
   def assigned_member_project_task
-        if params[:assign_project_task_team_member][:task_id].present?
-           MemberTask.create(assigned_member_project_task_params)
-         end
-         user_id = params[:assign_project_task_team_member][:user_id] 
-         project_id = params[:assign_project_task_team_member][:project_id]
-         @user = User.find(user_id)
-         @project = Project.find(project_id)
-         @un_assigned_task = []
-         @project.tasks.each do |t|
-            unless MemberTask.where(task_id: t.id).first.present?
-              @un_assigned_task.push(t)
-            end
-         end
-         @tasks = MemberTask.where(team_id: @user.team.id,  user_id: user_id, project_id: project_id)
-    
+    if params[:assign_project_task_team_member][:task_id].present?
+       MemberTask.create(assigned_member_project_task_params)
+     end
+     user_id = params[:assign_project_task_team_member][:user_id] 
+     project_id = params[:assign_project_task_team_member][:project_id]
+     @user = User.find(user_id)
+     @project = Project.find(project_id)
+     @un_assigned_task = MemberTask.un_assigned_task(@project)
+     @tasks = MemberTask.assigned_task(@user.id, @project.id)
+
   end
 
   def member_project_task
